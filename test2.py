@@ -10,12 +10,15 @@ def detectAndDisplay(frame):
     # -- Detect faces
     start = time.perf_counter()
     faces = face_cascade.detectMultiScale(frame_gray)
-    img_time = time.perf_counter() - start
-    print(img_time, "ms")
+
     for (x, y, w, h) in faces:
         center = (x + w // 2, y + h // 2)
         frame = cv.ellipse(frame, center, (w // 2, h // 2), 0, 0, 360, (255, 0, 255), 4)
         faceROI = frame_gray[y : y + h, x : x + w]
+        # Calculating time
+        img_time = time.perf_counter() - start
+        print(img_time, "ms")
+
     cv.imshow("Capture - Face detection", frame)
 
 
